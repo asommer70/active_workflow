@@ -77,4 +77,6 @@ ActiveWorkflow::Application.configure do
     Bullet.rails_logger = true
     Bullet.bullet_logger = true
   end
+
+  config.hosts << ENV['DEV_HOST']
 end
