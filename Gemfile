@@ -7,6 +7,10 @@ ruby '>=2.6.0'
 # TODO: update
 gem 'net-ftp-list', '~> 3.2.8'    # FtpsiteAgent
 
+# SAML
+gem 'omniauth', '~> 2.0.3'
+gem 'omniauth-saml', '~> 2.0.0'
+
 gem 'ace-rails-ap', '~> 4.4'
 gem 'bootsnap', '>= 1.5.1', require: false
 gem 'execjs', '~> 2.7.0'
