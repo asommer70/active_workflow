@@ -1,5 +1,8 @@
 *.rbc
 *.sassc
+*.swo
+*.swp
+.env
 .sass-cache
 capybara-*.html
 .rspec
@@ -30,3 +33,4 @@ spec/examples.txt
 /tags
 /.mozilla
 /.cache
+ssl/
