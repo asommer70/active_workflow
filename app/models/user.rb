@@ -1,8 +1,8 @@
 # ActiveWorkflow is designed to be a multi-User system.  Users have many Agents (and Messages created by those Agents).
 class User < ApplicationRecord
   DEVISE_MODULES = [:database_authenticatable, :registerable,
-                    :recoverable, :rememberable, :trackable,
-                    :validatable, :lockable,
+                    :recoverable, :rememberable,
+                    :validatable, :lockable, :saml_authenticatable, :trackable,
                     (ENV['REQUIRE_CONFIRMED_EMAIL'] == 'true' ? :confirmable : nil)].compact
   devise(*DEVISE_MODULES)
 

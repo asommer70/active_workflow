@@ -1,0 +1,4 @@
+# attribute-map.yml
+
+"urn:oasis:names:tc:SAML:2.0:attrname-format:basic": "username"
+"urn:oasis:names:tc:SAML:2.0:attrname-format:basic": "email"

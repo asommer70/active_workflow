@@ -247,4 +247,37 @@ Devise.setup do |config|
   # The router that invoked `devise_for`, in the example above, would be:
   # config.router_name = :my_engine
   #
+  #config.omniauth_path_prefix = '/auth'
+
+  # ==> SAML config
+  config.saml_route_helper_prefix = 'saml'
+  config.saml_create_user = true
+  config.saml_update_user = true
+  config.saml_default_user_key = :email
+  config.saml_session_index_key = :session_index
+  config.saml_use_subject = true
+  config.idp_settings_adapter = nil
+  config.saml_configure do |settings|
+    settings.assertion_consumer_service_url = ENV['SAML_ASSERTION_CONSUMER_SERVICE_URL']
+    settings.assertion_consumer_service_binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
+    settings.name_identifier_format = ENV['SAML_NAME_ID_FORMAT']
+    settings.issuer = ENV['SAML_ISSUER']
+    settings.authn_context = ENV['SAML_AUTHN_CONTEXT']
+    settings.idp_sso_target_url = ENV['SAML_IDP_SSO_TARGET_URL']
+    settings.idp_slo_target_url = ENV['SAML_IDP_SLO_TARGET_URL']
+    settings.certificate = ENV['SAML_CERT']
+    settings.private_key = ENV['SAML_PRIVATE_KEY']
+    settings.idp_cert_multi = {
+      signing: [ENV['SAML_SIGNING_CERT']],
+      encrypt: [ENV['SAML_ENCRYPT_CERT']]
+    }
+    settings.security = {
+      :authn_requests_signed => true,
+      :want_assertions_signed => true,
+      :signature_method => XMLSecurity::Document::RSA_SHA256,
+      :digest_method => XMLSecurity::Document::SHA1,
+      :embed_sign => true,
+      :metadata_signed => true
+   }
+ end
 end
