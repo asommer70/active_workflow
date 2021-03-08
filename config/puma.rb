@@ -5,9 +5,18 @@ threads threads_count, threads_count
 preload_app!
 
 rackup      DefaultRackup
-port        ENV['PORT'] || 3000
 
 environment ENV['RACK_ENV'] || 'development'
+
+if ENV['DISABLE_SSL'] == 'false'
+  ssl_bind '0.0.0.0', '3000', {
+    key: ENV['SSL_KEY_PATH'],
+    cert: ENV['SSL_CERT_PATH'],
+    verify_mode: 'none'
+  }
+else
+  port        ENV['PORT'] || 3000
+end
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection

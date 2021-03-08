@@ -6,6 +6,7 @@
 .sass-cache
 capybara-*.html
 .rspec
+docker-compose.yml
 /.bundle
 /vendor/bundle
 /vendor/cache

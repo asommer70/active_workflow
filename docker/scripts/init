@@ -61,5 +61,5 @@ if [ "${SINGLE_DYNO}" -eq "1" ]; then
   wait $web_id
 else
   # Web only
-  exec bundle exec puma
+  exec bundle exec puma -C /app/config/puma.rb
 fi
