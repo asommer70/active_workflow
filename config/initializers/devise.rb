@@ -257,12 +257,17 @@ Devise.setup do |config|
   config.saml_session_index_key = :session_index
   config.saml_use_subject = true
   config.idp_settings_adapter = nil
+  config.saml_update_resource_hook = ->(user, response, auth_value) {
+    # Use a random string for the password and get the username from the SAML response.
+    user.username = response.attributes.value_by_saml_attribute_key('username')
+    user.password = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+    Devise.saml_default_update_resource_hook.call(user, response, auth_value)
+  }
   config.saml_configure do |settings|
     settings.assertion_consumer_service_url = ENV['SAML_ASSERTION_CONSUMER_SERVICE_URL']
     settings.assertion_consumer_service_binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
     settings.name_identifier_format = ENV['SAML_NAME_ID_FORMAT']
     settings.issuer = ENV['SAML_ISSUER']
-    settings.authn_context = ENV['SAML_AUTHN_CONTEXT']
     settings.idp_sso_target_url = ENV['SAML_IDP_SSO_TARGET_URL']
     settings.idp_slo_target_url = ENV['SAML_IDP_SLO_TARGET_URL']
     settings.certificate = ENV['SAML_CERT']

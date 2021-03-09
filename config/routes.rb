@@ -89,7 +89,8 @@ ActiveWorkflow::Application.routes.draw do
 
   devise_for :users,
              controllers: {
-               registrations: 'users/registrations'
+               registrations: 'users/registrations',
+               saml_sessions: 'saml_sessions'
              },
              sign_out_via: [:post, :delete]
 
